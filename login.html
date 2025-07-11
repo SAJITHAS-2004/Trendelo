@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trendelo | Login & Sign Up</title>
+  <style>
+    body {
+      background: papayawhip;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+      width: 350px;
+      text-align: center;
+    }
+    input, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid gray;
+    }
+    button {
+      background: orange;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .toggle {
+      font-size: 14px;
+      color: blue;
+      cursor: pointer;
+    }
+    .message {
+      color: red;
+      font-size: 14px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="formTitle">Login</h2>
+
+    <input type="text" id="name" placeholder="Name" class="hidden"><br>
+    <input type="email" id="email" placeholder="Email"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+
+    <a href="F:\TRendelo\collection .html"><button onclick="handleForm()">Login</button></a>
+
+    <div class="toggle" onclick="toggleForm()">Don't have an account? Sign Up</div>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    let isLogin = true;
+
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById("formTitle").textContent = isLogin ? "Login" : "Sign Up";
+      document.querySelector("button").textContent = isLogin ? "Login" : "Register";
+      document.getElementById("name").classList.toggle("hidden");
+      document.querySelector(".toggle").innerHTML = isLogin
+        ? "Don't have an account? Sign Up"
+        : "Already have an account? Login";
+      document.getElementById("message").textContent = "";
+    }
+
+    function handleForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const message = document.getElementById("message");
+
+      if (!email || !password || (!isLogin && !name)) {
+        message.textContent = "Please fill all fields.";
+        return;
+      }
+
+      let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+      if (isLogin) {
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+          localStorage.setItem("loggedInUser", JSON.stringify(user));
+          window.location.href = "collections.html";
+        } else {
+          message.textContent = "Invalid login.";
+        }
+      } else {
+        if (users.find(u => u.email === email)) {
+          message.textContent = "Email already exists.";
+          return;
+        }
+        users.push({ name, email, password });
+        localStorage.setItem("users", JSON.stringify(users));
+        message.style.color = "green";
+        message.textContent = "Registered! Please login.";
+        toggleForm();
+      }
+    }
+  </script>
+</body>
+</html>

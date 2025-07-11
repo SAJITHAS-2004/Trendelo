@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Confirmed - Trendelo</title>
+  <style>
+    body {
+      background-color: #fffaf0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .checkmark-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #4CAF50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: pop 0.5s ease;
+    }
+
+    .checkmark {
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+      border-left: 5px solid white;
+      border-bottom: 5px solid white;
+      transform: rotate(-45deg);
+      animation: draw 0.4s ease-out forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes draw {
+      0% {
+        width: 0;
+        height: 0;
+      }
+      100% {
+        width: 60px;
+        height: 30px;
+      }
+    }
+
+    h1 {
+      margin-top: 30px;
+      color: #4CAF50;
+      font-size: 28px;
+    }
+
+    p {
+      color: #555;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    a {
+      margin-top: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      background: orange;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background: darkorange;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkmark-circle">
+    <div class="checkmark"></div>
+  </div>
+  <h1>Order Confirmed!</h1>
+  <p>Thank you for shopping with Trendelo 🎉</p>
+
+  <a href="collections.html>Back to Collections</a>
+
+
+  <!-- Optional: Auto redirect in 4 seconds -->
+  <script>
+    setTimeout(() => {
+      window.location.href = "collections.html";
+    }, 4000);
+  </script>
+
+</body>
+</html>
+
+
